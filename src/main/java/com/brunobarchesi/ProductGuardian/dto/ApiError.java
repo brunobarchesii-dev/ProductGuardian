@@ -4,14 +4,14 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public record ErrorResponse (int status, String message, List<FieldError> fieldErrorList){
+public record ApiError (int status, String message, List<ValidationFieldError> fieldErrorList){
 
-    public static ErrorResponse StandardResponse (String message){
-        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), message, List.of());
+    public static ApiError StandardResponse (String message){
+        return new  ApiError(HttpStatus.BAD_REQUEST.value(), message, List.of());
     }
 
-    public static ErrorResponse conflict(String message){
-        return new ErrorResponse(HttpStatus.CONFLICT.value(), message, List.of());
+    public static  ApiError conflict(String message){
+        return new  ApiError(HttpStatus.CONFLICT.value(), message, List.of());
     }
 
 
