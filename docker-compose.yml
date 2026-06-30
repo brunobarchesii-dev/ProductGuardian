@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: "postgres:17-alpine"
+    container_name: product-guardian-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: productguardian
+      POSTGRES_PASSWORD: productguardian123
+      POSTGRES_DB: productguardian_db
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+
+
+volumes:
+  postgres_data:
