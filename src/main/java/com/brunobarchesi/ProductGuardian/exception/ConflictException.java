@@ -1,12 +1,12 @@
 package com.brunobarchesi.ProductGuardian.exception;
 
-public class BusinessException extends RuntimeException{
+public class ConflictException extends RuntimeException{
 
-    public BusinessException(String message, Throwable cause) {
+    public ConflictException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public BusinessException(String message) {
+    public ConflictException(String message) {
         super(message);
     }
 }

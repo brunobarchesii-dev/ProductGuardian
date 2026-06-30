@@ -1,4 +1,4 @@
-package com.brunobarchesi.ProductGuardian.security;
+package com.brunobarchesi.ProductGuardian.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 
