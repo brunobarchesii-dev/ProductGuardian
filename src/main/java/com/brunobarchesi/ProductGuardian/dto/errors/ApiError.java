@@ -1,4 +1,4 @@
-package com.brunobarchesi.ProductGuardian.dto;
+package com.brunobarchesi.ProductGuardian.dto.errors;
 
 import org.springframework.http.HttpStatus;
 
