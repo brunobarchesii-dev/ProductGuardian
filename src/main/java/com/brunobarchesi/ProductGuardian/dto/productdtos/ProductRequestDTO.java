@@ -29,6 +29,7 @@ public record ProductRequestDTO(
         String storeName,
 
         @NotNull(message = "Purchase date is required.")
+        @PastOrPresent(message = "Purchase date cannot be in the future.")
         LocalDate purchaseDate,
 
         @NotNull(message = "Purchase price is required.")
