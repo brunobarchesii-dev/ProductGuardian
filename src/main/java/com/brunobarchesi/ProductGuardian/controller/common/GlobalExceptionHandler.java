@@ -1,7 +1,7 @@
 package com.brunobarchesi.ProductGuardian.controller.common;
 
-import com.brunobarchesi.ProductGuardian.dto.ApiError;
-import com.brunobarchesi.ProductGuardian.dto.ValidationFieldError;
+import com.brunobarchesi.ProductGuardian.dto.errors.ApiError;
+import com.brunobarchesi.ProductGuardian.dto.errors.ValidationFieldError;
 import com.brunobarchesi.ProductGuardian.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;

@@ -1,4 +1,4 @@
-package com.brunobarchesi.ProductGuardian.dto;
+package com.brunobarchesi.ProductGuardian.dto.userdtos;
 import com.brunobarchesi.ProductGuardian.dto.enums.RoleEnum;
 import java.time.LocalDateTime;
 import java.util.UUID;

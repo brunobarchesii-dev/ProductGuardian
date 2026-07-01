@@ -1,13 +1,12 @@
 package com.brunobarchesi.ProductGuardian.repository;
 
-import com.brunobarchesi.ProductGuardian.entity.UserEntity;
+import com.brunobarchesi.ProductGuardian.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, UUID> {
-
+public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
 
 }
