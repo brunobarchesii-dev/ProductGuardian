@@ -6,12 +6,13 @@ import com.brunobarchesi.ProductGuardian.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import java.util.List;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -21,7 +22,7 @@ public class GlobalExceptionHandler {
         List<ValidationFieldError> validationFieldErrors = fieldErrorList.stream().map(fieldError ->
                 new ValidationFieldError(fieldError.getField(), fieldError.getDefaultMessage())).toList();
 
-        return new ApiError(HttpStatus.UNPROCESSABLE_CONTENT.value(), "Validation Error", validationFieldErrors);
+        return new ApiError(HttpStatus.UNPROCESSABLE_CONTENT.value(), "Erro de validação: ", validationFieldErrors);
     }
 
 
@@ -56,9 +57,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleUnexpectedException(Exception exception) {
-        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred.",
+        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Ocorreu um erro inesperado!",
                 List.of()
         );
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiError handleInvalidCredentialsException(InvalidCredentialsException exception){
+        return new ApiError(HttpStatus.UNAUTHORIZED.value(), exception.getMessage(), List.of());
     }
 
 

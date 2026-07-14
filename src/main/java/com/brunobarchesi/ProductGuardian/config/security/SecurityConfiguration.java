@@ -18,32 +18,30 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    @Configuration
-    @EnableWebSecurity
-    @EnableMethodSecurity
-    @RequiredArgsConstructor
-    public class SecurityConfiguration {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-        private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-            return http
-                    .csrf(AbstractHttpConfigurer::disable)
-                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .exceptionHandling(ex -> ex
-                            .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                            .accessDeniedHandler((request, response, accessDeniedException) -> {
-                                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                            })
-                    )
-                    .authorizeHttpRequests(auth -> auth
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        })
+                )
+                .authorizeHttpRequests(auth -> auth
                                     .anyRequest().permitAll()
-                    )
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                    .build();
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
         }
 
         @Bean
@@ -56,4 +54,4 @@ public class SecurityConfiguration {
             return config.getAuthenticationManager();
         }
     }
-}
+

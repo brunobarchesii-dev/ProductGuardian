@@ -39,7 +39,7 @@ public class DocumentEntity {
 
     @Column(name = "file_path", nullable = false)
     private String filePath;
-
+ 
     @CreatedDate
     @Column(name = "uploaded_at", nullable = false, updatable = false)
     private LocalDateTime uploadedAt;

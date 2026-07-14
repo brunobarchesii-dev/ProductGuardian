@@ -23,6 +23,8 @@ public class TokenProvider {
     }
 
 
+
+
     public String buildToken(String username){
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + 15 * 60 * 1000);
@@ -34,6 +36,8 @@ public class TokenProvider {
                 .signWith(getSigningKey())
                 .compact();
     }
+
+
 
 
     public boolean isValid(String token){
@@ -51,6 +55,8 @@ public class TokenProvider {
     public String extractUsername(String token){
         return extractClaims(token).getSubject();
     }
+
+
 
 
     private Claims extractClaims(String token){
