@@ -2,13 +2,13 @@ package com.brunobarchesi.ProductGuardian.service;
 
 import com.brunobarchesi.ProductGuardian.config.security.TokenProvider;
 import com.brunobarchesi.ProductGuardian.dto.enums.RoleEnum;
-import com.brunobarchesi.ProductGuardian.dto.logindtos.LoginRequestDTO;
-import com.brunobarchesi.ProductGuardian.dto.logindtos.TokenResponseDTO;
 import com.brunobarchesi.ProductGuardian.dto.userdtos.UserRegisterDTO;
 import com.brunobarchesi.ProductGuardian.dto.userdtos.UserResponseDTO;
+import com.brunobarchesi.ProductGuardian.dto.userdtos.logindtos.LoginRequestDTO;
+import com.brunobarchesi.ProductGuardian.dto.userdtos.logindtos.TokenResponseDTO;
 import com.brunobarchesi.ProductGuardian.entity.UserEntity;
-import com.brunobarchesi.ProductGuardian.exception.BadRequestException;
 import com.brunobarchesi.ProductGuardian.exception.ConflictException;
+import com.brunobarchesi.ProductGuardian.exception.InvalidCredentialsException;
 import com.brunobarchesi.ProductGuardian.mapper.UserMapper;
 import com.brunobarchesi.ProductGuardian.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +42,6 @@ public class AuthService {
     }
 
 
-
-
     public TokenResponseDTO login(LoginRequestDTO loginDto){
         try{
             Authentication authentication = authenticationManager.authenticate(
@@ -53,7 +51,7 @@ public class AuthService {
             String token = tokenProvider.generateToken(authentication);
             return new TokenResponseDTO(token, "Bearer", 15 * 60 * 1000L);
         }catch (BadCredentialsException e){
-            throw new BadRequestException("Credenciais inválidas");
+            throw new InvalidCredentialsException("Credenciais inválidas");
         }
     }
 }
