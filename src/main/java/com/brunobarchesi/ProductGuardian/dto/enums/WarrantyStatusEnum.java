@@ -4,5 +4,4 @@ public enum WarrantyStatusEnum {
     ACTIVE,
     EXPIRING_SOON,
     EXPIRED,
-    NO_WARRANTY
 }
