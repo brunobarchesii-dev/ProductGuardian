@@ -55,6 +55,7 @@ public class ProductEntity {
     @Column(name = "warranty_months", nullable = false)
     private Integer warrantyMonths;
 
+    //Vou calcular automaticamente
     @Column(name = "warranty_end_date")
     private LocalDate warrantyEndDate;
 
